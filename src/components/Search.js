@@ -1,24 +1,12 @@
-import ReactDOM from 'react-dom';
-
-function Search() {
-  const [name, setName] = useState("");
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
+const searchItems = (searchValue) => {
+  setSearchInput(searchValue)
+  if (searchInput !== '') {
+      const filteredData = APIData.filter((item) => {
+          return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
+      })
+      setFilteredResults(filteredData)
   }
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <label>Enter your name:
-        <input 
-          type="text" 
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </label>
-      <input type="submit" />
-    </form>
-  )
+  else{
+      setFilteredResults(APIData)
+  }
 }
-
-ReactDOM.render(<Search />, document.getElementById('root'));
