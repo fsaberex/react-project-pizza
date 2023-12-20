@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+// import FoodJoke from './components/FoodJoke';
+import Ingredient from './components/Ingredient';
+// import Search from './components/Search';
+// import IngredientCard from './components/IngredientCard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App-header">
+      Cookbook Creator
+      {/* <FoodJoke /> */}
+      <Ingredient />
+      <input type = "search"/>
+      {/* <Search details={}/> */}
+      {/* <IngredientCard /> */}
     </div>
   );
 }
