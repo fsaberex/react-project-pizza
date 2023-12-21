@@ -1,10 +1,14 @@
 import './App.css';
 import FoodJoke from './components/FoodJoke';
 import Ingredient from './components/Ingredient';
-// import Search from './components/Search';
-// import IngredientCard from './components/IngredientCard';
+import Search from './components/Search';
+// import IngredientCard from './components/IngredientCard';]
+
 
 function App() {
+
+  
+
   return (
     <div className="App-header">
       <h1>Cookbook Creator</h1>
@@ -13,10 +17,10 @@ function App() {
       </div>
       <div>
         <Ingredient />
-        <input type = "search"/>
       </div>
-
-      {/* <Search details={}/> */}
+      <div>
+        <Search />
+      </div>
 
       {/* <IngredientCard /> */}
 

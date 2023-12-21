@@ -6,7 +6,7 @@ function Ingredient(){
 
     const [Ingredients, setIngredient] = useState([]);
 
-    let ingredientName = 'pizza';
+    let ingredientName = 'hotdog';
 
     useEffect(() => {
 

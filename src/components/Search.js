@@ -1,12 +1,24 @@
-const searchItems = (searchValue) => {
-  setSearchInput(searchValue)
-  if (searchInput !== '') {
-      const filteredData = APIData.filter((item) => {
-          return Object.values(item).join('').toLowerCase().includes(searchInput.toLowerCase())
-      })
-      setFilteredResults(filteredData)
-  }
-  else{
-      setFilteredResults(APIData)
-  }
+import React from 'react';
+import { useRef } from 'react';
+
+function Search() {
+    const textRef = useRef();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(textRef.current.value);
+
+    textRef.current.value='';
+
+  };
+
+  return(
+    <form onSubmit={handleSubmit}>
+          <input type="search" ref={textRef}/>
+          <button type="submit">Submit</button>
+        </form>
+  );
 }
+
+export default Search;
