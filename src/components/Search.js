@@ -1,23 +1,23 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 
-function Search() {
-    const textRef = useRef();
+function Search({ onSearch }) {
+  const textRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(textRef.current.value);
+    const searchTerm = textRef.current.value;
+    onSearch(searchTerm);
 
-    textRef.current.value='';
-
+    // Clear the input field after submitting the search
+    textRef.current.value = '';
   };
 
-  return(
+  return (
     <form onSubmit={handleSubmit}>
-          <input type="search" ref={textRef}/>
-          <button type="submit">Submit</button>
-        </form>
+      <input type="search" ref={textRef} />
+      <button type="submit">Submit</button>
+    </form>
   );
 }
 
