@@ -29,10 +29,10 @@ function FoodJoke(){
     const jokeText = jokes;
 
     return (
-        <div>
-            <h2>Joke of the Day!</h2>
+        <>
+            <p>Joke of the Day!</p>
             <p>{jokeText}</p>   
-        </div>
+        </>
         
     )
     

@@ -19,7 +19,7 @@ function App() {
     <div className="App-header">
       <h1>Cookbook Creator</h1>
       <div>
-        <p><FoodJoke /></p>
+        <FoodJoke />
       </div>
       <div>
         <Ingredient />
