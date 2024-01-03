@@ -4,10 +4,8 @@ import FoodJoke from './components/FoodJoke';
 import Ingredient from './components/Ingredient';
 // import Search from './components/Search';
 import { appReducer } from './components/Read';
-import { useState, useReducer } from 'react';
+import { useReducer } from 'react';
 // import IngredientCard from './components/IngredientCard';]
-import RecipeCard from './components/RecipeCard';
-import Cookbook from './components/Cookbook';
 
 
 function App() {
@@ -20,9 +18,9 @@ function App() {
     <appContext.Provider value={{SearchTerm, setSearchTerm}}>
     <div className="App-header">
       <h1>Cookbook Creator</h1>
-      {/* <div>
+      <div>
         <p><FoodJoke /></p>
-      </div> */}
+      </div>
       <div>
         <Ingredient />
       </div>
