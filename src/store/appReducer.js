@@ -1,13 +1,40 @@
+export const INITIAL_RECIPE_STATE = {
+    ingredient: [],
+    unit: '',
+    quantity: 0
+}
+
 export const appReducer = (state, action) => {
 
-    const {type, payload} = action;
+    switch (action.type) {
 
-    switch (type) {
-        case 'searchIngredient':
-            return state
+        case 'addIngredient':
+            return {
+                ...state,
+                ingredient: [state.ingredient]
+                
+            };
 
-        case 'searchRecipe':
-            return state
+        case 'increaseIngredientQuantity':
+            return {
+                ...state,
+                quantity: state.quantity +1
+            };
+
+        case 'decreaseIngredientQuantity':
+            return {
+                ...state,
+                quantity: state.quantity -1
+            };
+
+        case 'changeUnit':
+            return {
+                ...state,
+                [action.payload.name]:action.payload.value
+            };
+
+        default:
+            return state;
     }
 
 }

@@ -1,21 +1,18 @@
 import './App.css';
-import { appContext } from './store/appContext';
 import FoodJoke from './components/FoodJoke';
 import Ingredient from './components/Ingredient';
-// import Search from './components/Search';
-import { appReducer } from './components/Read';
-import { useReducer } from 'react';
-// import IngredientCard from './components/IngredientCard';]
+import { appReducer } from './store/appReducer';
+import React, { useReducer } from 'react';
+import Cookbook from './components/Cookbook';
 
 
 function App() {
 
-  const searchResults = [];
+  const savedCookbook = [];
 
-  const [SearchTerm, setSearchTerm] = useReducer(appReducer,searchResults);
+  const [state, dispatch] = useReducer(appReducer, savedCookbook);
 
   return (
-    <appContext.Provider value={{SearchTerm, setSearchTerm}}>
     <div className="App-header">
       <h1>Cookbook Creator</h1>
       <div>
@@ -25,13 +22,9 @@ function App() {
         <Ingredient />
       </div>
       <div>
-        {/* <Search /> */}
-        {/* <RecipeCard /> */}
+      <Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />
       </div>
-      {/* <IngredientCard /> */}
-
     </div>
-    </appContext.Provider>
   );
 }
 

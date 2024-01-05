@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import IngredientCard from './IngredientCard';
-import RecipeCard from './RecipeCard';
 import Search from './Search';
-import Cookbook from './Cookbook';
+import RecipeCard from './RecipeCard';
+import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
 
 function Ingredient() {
+
   const [ingredients, setIngredients] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [savedRecipes, setSavedRecipes] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
 
   const handleSearch = async (searchTerm) => {
     let apikey = '76539e4840cf430da3c11786bf18ecbe';
@@ -23,59 +25,95 @@ function Ingredient() {
     } catch (error) {
       console.error('Error fetching data:', error);
     }
+
   };
 
-  const handleClick = (ingredient) => {
-    setSelectedIngredients([...selectedIngredients, ingredient]);
+//   const handleIngredientSelect = (ingredient) => {
+//     setSelectedIngredients([...selectedIngredients, ingredient]);
+//   };
+
+  const handleIngredientSelect = (e) => {
+    dispatch({type:'addIngredient'});
   };
 
-  const handleRemoveIngredient = (ingredientToRemove) => {
-    const updatedIngredients = selectedIngredients.filter(
-      (ingredient) => ingredient.id !== ingredientToRemove.id
-    );
-    setSelectedIngredients(updatedIngredients);
+  const handleQuantityIncrease = (e) => {
+    dispatch({type:'increaseIngredientQuantity'});
   };
 
-  const handleSaveRecipeToCookbook = (ingredients, quantities) => {
-    // Create an object representing the saved recipe
-    const newRecipe = {
-      ingredients,
-      quantities,
-      units: Object.fromEntries(Object.keys(quantities).map(id => [id, 'grams'])),
-    };
-
-    // Update the saved recipes state
-    setSavedRecipes([...savedRecipes, newRecipe]);
+  const handleQuantityDecrease = (e) => {
+    dispatch({type:'decreaseIngredientQuantity'});
   };
+
+  const handleUnitChange = (e) => {
+    dispatch({type:'changeUnit', payload:{name:e.target.name, value:e.target.value}});
+  };
+
+  console.log(state);
+
+//   const handleQuantityChange = (ingredient, value) => {
+//     setQuantities({
+//       ...quantities,
+//       [ingredient.id]: value,
+//     });
+//   };
+
+// const handleUnitChange = (unit) => {
+//     dispatch({type:'addUnit', payload:unit});
+//   }
+
+//   const handleQuantityChange = (value) => {
+//     dispatch({type:'addQuantity', payload:value});
+//   }
 
   useEffect(() => {
     // Initial load with a default search term
     handleSearch('');
   }, []); // Empty dependency array to run once on mount
 
-  const ingredientData = ingredients.map((ingredient) => (
-    <IngredientCard
-      key={ingredient.id}
-      ingredient={ingredient}
-      onClick={() => handleClick(ingredient)}
-    />
-  ));
+  console.log(ingredients);
 
   return (
     <div>
       {/* Render the Search component */}
       <Search onSearch={handleSearch} />
-      {ingredientData}
-      {/* Render the RecipeCard with selected ingredients and onSaveRecipe callback */}
+
+      {/* Render the list of IngredientCard components */}
+      {/* {ingredients.map((ingredient) => ( */}
+      {ingredients.map((ingredient) => (
+        <IngredientCard
+          key={ingredient.id}
+          ingredient={ingredient}
+        //   unit = 
+        //   value={quantities[ingredient.id] || ''}
+        //   onClick={() => handleIngredientSelect(ingredient)}
+        onClick={() => handleIngredientSelect()}
+        //   onChange={(e) => handleQuantityChange(ingredient, e.target.value)}
+        //   onValueChange={() => handleQuantityChange(value)}
+        onValueIncrease={() => handleQuantityIncrease()}
+        onValueDecrease={() => handleQuantityDecrease()}
+        //   onUnitChange={() => handleUnitChange(unit)}
+        onUnitChange={() => handleUnitChange()}
+        quantity={state.quantity}
+        />
+      ))}
+
+      {/* RecipeCard now receives selectedIngredients directly as props */}
       <RecipeCard
         selectedIngredients={selectedIngredients}
-        onRemoveIngredient={handleRemoveIngredient}
-        onSaveRecipeToCookbook={handleSaveRecipeToCookbook}
+        onRemoveIngredient={(ingredientToRemove) => {
+          const updatedIngredients = selectedIngredients.filter(
+            (ingredient) => ingredient.id !== ingredientToRemove.id
+          );
+          setSelectedIngredients(updatedIngredients);
+        }}
+        onSaveRecipeToCookbook={(ingredients, quantities) => {
+          // Handle saving the recipe to the cookbook here
+          console.log('Saving recipe to cookbook:', ingredients, quantities);
+        }}
       />
-      {/* Render the Cookbook component with saved recipes */}
-      <Cookbook savedRecipes={savedRecipes} />
     </div>
   );
 }
+
 
 export default Ingredient;

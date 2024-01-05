@@ -10,12 +10,14 @@ const RecipeCard = ({ selectedIngredients, onRemoveIngredient, onSaveRecipeToCoo
     });
   };
 
+
   const handleRemoveIngredient = (ingredient) => {
     onRemoveIngredient(ingredient);
   };
 
   const handleSaveRecipe = () => {
     onSaveRecipeToCookbook(selectedIngredients, quantities);
+    console.log(selectedIngredients);
   };
 
   return (
@@ -26,17 +28,6 @@ const RecipeCard = ({ selectedIngredients, onRemoveIngredient, onSaveRecipeToCoo
           selectedIngredients.map((ingredient) => (
             <li key={ingredient.id}>
               {ingredient.name}{' '}
-              <input
-                type="number"
-                value={quantities[ingredient.id] || ''}
-                onChange={(e) => handleQuantityChange(ingredient, e.target.value)}
-                placeholder="Quantity"
-              />
-              <select>
-                <option value="grams">grams</option>
-                <option value="pieces">pieces</option>
-                {/* Add other unit options as needed */}
-              </select>
               <button onClick={() => handleRemoveIngredient(ingredient)}>
                 Remove
               </button>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+import { appReducer } from '../store/appReducer';
 
-const Cookbook = ({ savedRecipes }) => {
+const Cookbook = ({ savedRecipes, dispatch }) => {
   return (
     <div>
       <h2>Cookbook</h2>
