@@ -2,14 +2,13 @@ import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import IngredientCard from './IngredientCard';
 import Search from './Search';
-import RecipeCard from './RecipeCard';
 import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
+import Quantity from './Quantity';
+import Unit from './Unit';
 
 function Ingredient() {
 
   const [ingredients, setIngredients] = useState([]);
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [quantities, setQuantities] = useState({});
   const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
 
   const handleSearch = async (searchTerm) => {
@@ -28,89 +27,53 @@ function Ingredient() {
 
   };
 
-//   const handleIngredientSelect = (ingredient) => {
-//     setSelectedIngredients([...selectedIngredients, ingredient]);
-//   };
-
-  const handleIngredientSelect = (e) => {
-    dispatch({type:'addIngredient'});
+  const handleIngredientSelect = (selectedIngredient, index) => {
+    dispatch({ type: 'addIngredient', payload: { ...selectedIngredient, index } });
   };
 
-  const handleQuantityIncrease = (e) => {
+  const handleQuantityIncrease = () => {
     dispatch({type:'increaseIngredientQuantity'});
   };
 
-  const handleQuantityDecrease = (e) => {
+  const handleQuantityDecrease = () => {
     dispatch({type:'decreaseIngredientQuantity'});
   };
 
-  const handleUnitChange = (e) => {
-    dispatch({type:'changeUnit', payload:{name:e.target.name, value:e.target.value}});
+  const handleUnitChange = (selectedValue) => {
+    dispatch({
+        type: 'changeUnit',
+        payload: selectedValue,
+    });
   };
 
   console.log(state);
 
-//   const handleQuantityChange = (ingredient, value) => {
-//     setQuantities({
-//       ...quantities,
-//       [ingredient.id]: value,
-//     });
-//   };
-
-// const handleUnitChange = (unit) => {
-//     dispatch({type:'addUnit', payload:unit});
-//   }
-
-//   const handleQuantityChange = (value) => {
-//     dispatch({type:'addQuantity', payload:value});
-//   }
-
   useEffect(() => {
-    // Initial load with a default search term
     handleSearch('');
-  }, []); // Empty dependency array to run once on mount
+  }, []);
 
   console.log(ingredients);
 
   return (
     <div>
-      {/* Render the Search component */}
       <Search onSearch={handleSearch} />
 
-      {/* Render the list of IngredientCard components */}
-      {/* {ingredients.map((ingredient) => ( */}
-      {ingredients.map((ingredient) => (
+      {ingredients.map((ingredient, index) => (
         <IngredientCard
           key={ingredient.id}
           ingredient={ingredient}
-        //   unit = 
-        //   value={quantities[ingredient.id] || ''}
-        //   onClick={() => handleIngredientSelect(ingredient)}
-        onClick={() => handleIngredientSelect()}
-        //   onChange={(e) => handleQuantityChange(ingredient, e.target.value)}
-        //   onValueChange={() => handleQuantityChange(value)}
-        onValueIncrease={() => handleQuantityIncrease()}
-        onValueDecrease={() => handleQuantityDecrease()}
-        //   onUnitChange={() => handleUnitChange(unit)}
-        onUnitChange={() => handleUnitChange()}
-        quantity={state.quantity}
+          onClick={() => handleIngredientSelect(ingredient, index)}
         />
       ))}
 
-      {/* RecipeCard now receives selectedIngredients directly as props */}
-      <RecipeCard
-        selectedIngredients={selectedIngredients}
-        onRemoveIngredient={(ingredientToRemove) => {
-          const updatedIngredients = selectedIngredients.filter(
-            (ingredient) => ingredient.id !== ingredientToRemove.id
-          );
-          setSelectedIngredients(updatedIngredients);
-        }}
-        onSaveRecipeToCookbook={(ingredients, quantities) => {
-          // Handle saving the recipe to the cookbook here
-          console.log('Saving recipe to cookbook:', ingredients, quantities);
-        }}
+      <Quantity
+        onValueIncrease={() => handleQuantityIncrease()}
+        onValueDecrease={() => handleQuantityDecrease()}
+        quantity={state.quantity}
       />
+
+      <Unit onUnitChange={handleUnitChange}/>
+
     </div>
   );
 }

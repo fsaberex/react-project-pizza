@@ -1,5 +1,5 @@
 import './App.css';
-import FoodJoke from './components/FoodJoke';
+//import FoodJoke from './components/FoodJoke';
 import Ingredient from './components/Ingredient';
 import { appReducer } from './store/appReducer';
 import React, { useReducer } from 'react';
@@ -15,9 +15,9 @@ function App() {
   return (
     <div className="App-header">
       <h1>Cookbook Creator</h1>
-      <div>
+      {/* <div>
         <FoodJoke />
-      </div>
+      </div> */}
       <div>
         <Ingredient />
       </div>

@@ -1,7 +1,8 @@
 export const INITIAL_RECIPE_STATE = {
-    ingredient: [],
-    unit: '',
-    quantity: 0
+    ingredients: [],
+    quantity: 0,
+    unit: 'grams',
+    recipeName: ''
 }
 
 export const appReducer = (state, action) => {
@@ -11,8 +12,7 @@ export const appReducer = (state, action) => {
         case 'addIngredient':
             return {
                 ...state,
-                ingredient: [state.ingredient]
-                
+                ingredients: [...state.ingredients, action.payload],
             };
 
         case 'increaseIngredientQuantity':
@@ -30,7 +30,7 @@ export const appReducer = (state, action) => {
         case 'changeUnit':
             return {
                 ...state,
-                [action.payload.name]:action.payload.value
+                unit: action.payload
             };
 
         default:
