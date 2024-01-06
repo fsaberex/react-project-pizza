@@ -1,24 +1,8 @@
 import React, { useState } from 'react';
+import { appContext } from '../store/appContext';
 
-const RecipeCard = ({ selectedIngredients, onRemoveIngredient, onSaveRecipeToCookbook }) => {
-  const [quantities, setQuantities] = useState({});
+function RecipeCard({ selectedIngredients }) {
 
-  const handleQuantityChange = (ingredient, value) => {
-    setQuantities({
-      ...quantities,
-      [ingredient.id]: value,
-    });
-  };
-
-
-  const handleRemoveIngredient = (ingredient) => {
-    onRemoveIngredient(ingredient);
-  };
-
-  const handleSaveRecipe = () => {
-    onSaveRecipeToCookbook(selectedIngredients, quantities);
-    console.log(selectedIngredients);
-  };
 
   return (
     <div>
@@ -28,16 +12,12 @@ const RecipeCard = ({ selectedIngredients, onRemoveIngredient, onSaveRecipeToCoo
           selectedIngredients.map((ingredient) => (
             <li key={ingredient.id}>
               {ingredient.name}{' '}
-              <button onClick={() => handleRemoveIngredient(ingredient)}>
-                Remove
-              </button>
             </li>
           ))
         ) : (
           <p>No ingredients selected yet.</p>
         )}
       </ul>
-      <button onClick={handleSaveRecipe}>Save</button>
     </div>
   );
 };
