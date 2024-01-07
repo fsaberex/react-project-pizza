@@ -1,12 +1,10 @@
-import React from 'react';
+import { useContext } from 'react';
+import appContext from '../store/appContext';
 
 
-function Unit({ onUnitChange }) {
+function Unit() {
 
-    const handleSelectChange = (e) => {
-        const selectedValue = e.target.value;
-        onUnitChange(selectedValue);
-    };
+  const { handleSelectChange } = useContext(appContext);
 
   return (
     <div>

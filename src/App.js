@@ -5,9 +5,11 @@ import Ingredient from './components/Ingredient';
 import Recipe from './components/Recipe';
 import Cookbook from './components/Cookbook';
 import Search from './components/Search';
+import Quantity from './components/Quantity';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { appReducer } from './store/appReducer';
 import { AppProvider } from './store/appContext';
+import Unit from './components/Unit';
 
 function App() {
 
@@ -22,6 +24,8 @@ function App() {
           {/* <FoodJoke /> */}
           <Search />
           <Ingredient />
+          <Quantity />
+          <Unit />
           <Recipe />
           <Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />
         </AppProvider>

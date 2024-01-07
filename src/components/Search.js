@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import SelectIngredient from './SelectIngredient';
 
-
 function Search() {
   const textRef = useRef();
   const [ingredients, setIngredients] = useState([]);

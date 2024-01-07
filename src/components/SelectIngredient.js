@@ -1,4 +1,4 @@
-import React, { useRef, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import IngredientCard from './IngredientCard';
 import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
 

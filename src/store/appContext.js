@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useReducer } from "react";
+import { createContext, useState, useEffect, useReducer, useRef } from "react";
 import { Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import IngredientCard from '../components/IngredientCard';
@@ -12,25 +12,42 @@ const appContext = createContext({});
 
 export const AppProvider = ({ children }) => {
 
+    const textRef = useRef();
     const [ingredients, setIngredients] = useState([]);
     const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
     const [ingredient, setIngredient] = useState(false);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    
+        const searchTerm = textRef.current.value;
+        handleSearch(searchTerm);
+    
+        // Clear the input field after submitting the search
+        textRef.current.value = '';
+      };
+
     const handleSearch = async (searchTerm) => {
-    let apikey = '76539e4840cf430da3c11786bf18ecbe';
+        let apikey = '76539e4840cf430da3c11786bf18ecbe';
+    
+        try {
+          let res = await axios.get(
+            `https://api.spoonacular.com/food/ingredients/search?query=${searchTerm}&number=10&sort=calories&sortDirection=desc&apiKey=` + apikey
+          );
+    
+          let ingredientData = res.data.results;
+          setIngredients(ingredientData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+    
+      };
+    
+    useEffect(() => {
+        handleSearch('');
+    }, []);
 
-    try {
-        let res = await axios.get(
-        `https://api.spoonacular.com/food/ingredients/search?query=${searchTerm}&number=10&sort=calories&sortDirection=desc&apiKey=` + apikey
-        );
-
-        let ingredientData = res.data.results;
-        setIngredients(ingredientData);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-    }
-
-    };
+    const quantity = state.quantity;
 
     const handleIngredientSelect = (selectedIngredient, index) => {
     dispatch({ type: 'addIngredient', payload: { ...selectedIngredient, index } });
@@ -38,29 +55,30 @@ export const AppProvider = ({ children }) => {
 
     const handleQuantityIncrease = () => {
         dispatch({type:'increaseIngredientQuantity'});
-    };
-
+      };
+    
     const handleQuantityDecrease = () => {
         dispatch({type:'decreaseIngredientQuantity'});
-    };
+      };
 
-    const handleUnitChange = (selectedValue) => {
+    const handleSelectChange = (e) => {
+        const selectedValue = e.target.value;
         dispatch({
             type: 'changeUnit',
             payload: selectedValue,
-    });
+        });
+        // handleUnitChange(selectedValue);
     };
 
     console.log(state);
-
-    useEffect(() => {
-        handleSearch('');
-    }, []);
 
     console.log(ingredients);
 
     return (
         <appContext.Provider value={{
+            handleSubmit, handleSearch,
+            handleQuantityIncrease, handleQuantityDecrease, quantity,
+            handleSelectChange
 
         }}>
             {children}
