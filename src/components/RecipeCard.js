@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { appContext } from '../store/appContext';
 
 function RecipeCard({ selectedIngredients }) {
 

@@ -1,18 +1,15 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import IngredientCard from './IngredientCard';
-import Search from './Search';
 import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
 import Quantity from './Quantity';
 import Unit from './Unit';
-import { appContext } from '../store/appContext';
 
 
 function Ingredient() {
 
   const [ingredients, setIngredients] = useState([]);
   const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
-  const [ingredient, setIngredient] = useState(false);
 
   const handleSearch = async (searchTerm) => {
     let apikey = '76539e4840cf430da3c11786bf18ecbe';
@@ -58,10 +55,8 @@ function Ingredient() {
   console.log(ingredients);
 
   return (
-    <appContext.Provider value={[ingredient, setIngredient]}>
+    
     <div>
-      <Search onSearch={handleSearch} />
-
       {ingredients.map((ingredient, index) => (
         <IngredientCard
           key={ingredient.id}
@@ -79,7 +74,6 @@ function Ingredient() {
       <Unit onUnitChange={handleUnitChange}/>
 
     </div>
-    </appContext.Provider>
   );
 }
 
