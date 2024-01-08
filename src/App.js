@@ -7,7 +7,7 @@ import Cookbook from './components/Cookbook';
 import Search from './components/Search';
 import SelectIngredient from './components/SelectIngredient';
 import Quantity from './components/Quantity';
-import { Route, Routes, Link, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import { appReducer } from './store/appReducer';
 import { AppProvider } from './store/appContext';
 import Unit from './components/Unit';
