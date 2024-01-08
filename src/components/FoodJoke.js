@@ -7,7 +7,6 @@ function FoodJoke(){
 
     useEffect(() => {
 
-        //let order = 'banana&number=2&sort=calories&sortDirection=desc'
         let apikey = '76539e4840cf430da3c11786bf18ecbe'
 
         const getJoke = async () => {

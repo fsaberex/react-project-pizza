@@ -23,7 +23,6 @@ export const AppProvider = ({ children }) => {
         const searchTerm = textRef.current.value;
         handleSearch(searchTerm);
     
-        // Clear the input field after submitting the search
         textRef.current.value = '';
       };
 

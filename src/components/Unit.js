@@ -12,6 +12,8 @@ function Unit() {
         <select name="unit" onChange={handleSelectChange}>
           <option value="grams">grams</option>
           <option value="pieces">pieces</option>
+          <option value="cups">cups</option>
+          <option value="Teaspoons">Teaspoons</option>
           {/* Add more unit options */}
         </select>
       </div>
