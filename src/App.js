@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import './App.css';
-//import FoodJoke from './components/FoodJoke';
+import FoodJoke from './components/FoodJoke';
 import Ingredient from './components/Ingredient';
 import Recipe from './components/Recipe';
 import Cookbook from './components/Cookbook';
@@ -23,7 +23,6 @@ function App() {
       <div className="App-header">
         <h1>Cookbook Creator</h1>
         <AppProvider>
-          {/* <FoodJoke /> */}
           <Search />
           <SelectIngredient />
           {/* <SubmitIngredient /> */}
@@ -32,6 +31,7 @@ function App() {
           <Unit />
           <Recipe />
           <Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />
+          <FoodJoke />
         </AppProvider>
         
       </div>
