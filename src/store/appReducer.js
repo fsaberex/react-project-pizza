@@ -19,13 +19,10 @@ export const appReducer = (state, action) => {
                 ingredient: [...state.ingredient, action.payload]
             };
         
-        case 'addSelectedIngredient':
+        case 'addIngredientToRecipe':
             return {
                 ...state,
-                selectedIngredient: [...state.ingredient.name, 
-                    ...state.ingredient.quantity, 
-                    ...state.ingredient.unit,
-                    action.payload]
+                selectedIngredient: [...state.ingredient.name, ]
 
             }
 

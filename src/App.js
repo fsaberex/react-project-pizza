@@ -6,9 +6,8 @@ import Recipe from './components/Recipe';
 import Cookbook from './components/Cookbook';
 import Search from './components/Search';
 import SelectIngredient from './components/SelectIngredient';
-// import SubmitIngredient from './components/SubmitIngredient';
 import Quantity from './components/Quantity';
-//import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes, Link, Switch, useHistory } from 'react-router-dom';
 import { appReducer } from './store/appReducer';
 import { AppProvider } from './store/appContext';
 import Unit from './components/Unit';
@@ -21,16 +20,27 @@ function App() {
 
   return (
       <div className="App-header">
+        <>
+           <nav>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/MyCookbook">Cookbook</Link></li>
+            </ul>
+           </nav>
+        </>
         <h1>Cookbook Creator</h1>
         <AppProvider>
           <Search />
           <SelectIngredient />
-          {/* <SubmitIngredient /> */}
           <Ingredient />
           <Quantity />
           <Unit />
           <Recipe />
-          <Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />
+          <Routes>
+            <Route path="/MyCookbook" element={<Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />}>
+              Cookbook
+            </Route>
+          </Routes>
           <FoodJoke />
         </AppProvider>
         
