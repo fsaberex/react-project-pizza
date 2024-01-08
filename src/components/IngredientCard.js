@@ -6,9 +6,7 @@ function IngredientCard({ ingredient, onClick }) {
   return (
     <div>
       <div id="ingredient">
-        <p>
-        {ingredient.name}
-        </p>
+        <p>{ingredient.name}</p>
       </div>
       <div>
         <button onClick={onClick}>Add to Recipe</button>

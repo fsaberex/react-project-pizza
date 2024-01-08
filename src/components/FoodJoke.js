@@ -30,7 +30,7 @@ function FoodJoke(){
 
     return (
         <>
-            <p>Joke of the Day!</p>
+            <h3>Joke of the Day!</h3>
             <p>{jokeText}</p>   
         </>
         

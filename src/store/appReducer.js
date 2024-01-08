@@ -1,8 +1,12 @@
 export const INITIAL_RECIPE_STATE = {
-    ingredients: [],
-    quantity: 0,
+    ingredient: [],
+    quantity: 1,
     unit: 'grams',
-    recipeName: ''
+    selectedIngredient: [],
+    recipeName: '',
+    recipeSteps: [],
+    cookbookName: '',
+    cookbookRecipes: []
 }
 
 export const appReducer = (state, action) => {
@@ -12,8 +16,18 @@ export const appReducer = (state, action) => {
         case 'addIngredient':
             return {
                 ...state,
-                ingredients: [...state.ingredients, action.payload],
+                ingredient: [...state.ingredient, action.payload]
             };
+        
+        case 'addSelectedIngredient':
+            return {
+                ...state,
+                selectedIngredient: [...state.ingredient.name, 
+                    ...state.ingredient.quantity, 
+                    ...state.ingredient.unit,
+                    action.payload]
+
+            }
 
         case 'increaseIngredientQuantity':
             return {
@@ -31,6 +45,30 @@ export const appReducer = (state, action) => {
             return {
                 ...state,
                 unit: action.payload
+            };
+
+        case 'addRecipeName':
+            return {
+                ...state,
+
+            };
+        
+        case 'addRecipeSteps':
+            return {
+                ...state,
+    
+            };
+        
+        case 'addCookbookName':
+            return {
+                ...state,
+    
+            };
+        
+        case 'addRecipe':
+            return {
+                ...state,
+    
             };
 
         default:

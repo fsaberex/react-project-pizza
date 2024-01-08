@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+// import { useContext } from 'react';
+// import appContext from '../store/appContext';
 
-function RecipeCard({ selectedIngredients }) {
+// function RecipeCard({ selectedIngredients }) {
+function RecipeCard() {
+
+  //const{ handleAddIngredient } = useContext(appContext);
 
 
   return (
     <div>
       <h2>Recipe Card</h2>
       <ul>
-        {selectedIngredients && selectedIngredients.length > 0 ? (
+        <li>
+
+        </li>
+        {/* {selectedIngredients && selectedIngredients.length > 0 ? (
           selectedIngredients.map((ingredient) => (
             <li key={ingredient.id}>
               {ingredient.name}{' '}
@@ -15,7 +23,7 @@ function RecipeCard({ selectedIngredients }) {
           ))
         ) : (
           <p>No ingredients selected yet.</p>
-        )}
+        )} */}
       </ul>
     </div>
   );

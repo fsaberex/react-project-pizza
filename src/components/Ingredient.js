@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
+//import React, { useReducer } from 'react';
+//import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
 
 function Ingredient() {
 
-  const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
+  //const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
 
-
-  console.log(state);
 
 
   return (

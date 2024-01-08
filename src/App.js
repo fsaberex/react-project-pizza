@@ -1,12 +1,14 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer } from 'react';
 import './App.css';
 //import FoodJoke from './components/FoodJoke';
 import Ingredient from './components/Ingredient';
 import Recipe from './components/Recipe';
 import Cookbook from './components/Cookbook';
 import Search from './components/Search';
+import SelectIngredient from './components/SelectIngredient';
+// import SubmitIngredient from './components/SubmitIngredient';
 import Quantity from './components/Quantity';
-import { Route, Switch, useHistory } from 'react-router-dom';
+//import { Route, Switch, useHistory } from 'react-router-dom';
 import { appReducer } from './store/appReducer';
 import { AppProvider } from './store/appContext';
 import Unit from './components/Unit';
@@ -23,6 +25,8 @@ function App() {
         <AppProvider>
           {/* <FoodJoke /> */}
           <Search />
+          <SelectIngredient />
+          {/* <SubmitIngredient /> */}
           <Ingredient />
           <Quantity />
           <Unit />

@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect, useReducer, useRef } from "react";
-import { Route, Switch, useHistory } from 'react-router-dom';
+// import { Route, Switch, useHistory } from 'react-router-dom';
 import axios from 'axios';
-import IngredientCard from '../components/IngredientCard';
-import Search from '../components/Search';
+// import IngredientCard from '../components/IngredientCard';
+// import Search from '../components/Search';
 import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
-import Quantity from '../components/Quantity';
-import Unit from '../components/Unit';
+// import Quantity from '../components/Quantity';
+// import Unit from '../components/Unit';
 
 const appContext = createContext({});
 
@@ -15,7 +15,7 @@ export const AppProvider = ({ children }) => {
     const textRef = useRef();
     const [ingredients, setIngredients] = useState([]);
     const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
-    const [ingredient, setIngredient] = useState(false);
+    // const [ingredient, setIngredient] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -48,9 +48,13 @@ export const AppProvider = ({ children }) => {
     }, []);
 
     const quantity = state.quantity;
+    const ingredientsList = ingredients;
 
     const handleIngredientSelect = (selectedIngredient, index) => {
-    dispatch({ type: 'addIngredient', payload: { ...selectedIngredient, index } });
+    dispatch({ 
+            type: 'addIngredient', 
+            payload: { ...selectedIngredient, index } 
+        });
     };
 
     const handleQuantityIncrease = () => {
@@ -67,16 +71,19 @@ export const AppProvider = ({ children }) => {
             type: 'changeUnit',
             payload: selectedValue,
         });
-        // handleUnitChange(selectedValue);
     };
+
+    // 
+    
 
     console.log(state);
 
-    console.log(ingredients);
+    console.log(ingredientsList);
 
     return (
         <appContext.Provider value={{
             handleSubmit, handleSearch,
+            handleIngredientSelect, ingredientsList,
             handleQuantityIncrease, handleQuantityDecrease, quantity,
             handleSelectChange
 

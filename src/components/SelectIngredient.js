@@ -1,21 +1,16 @@
-import React, { useReducer } from 'react';
 import IngredientCard from './IngredientCard';
-import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
+import { useContext } from 'react';
+import appContext from '../store/appContext';
 
-function SelectIngredient({ ingredients }) {
+function SelectIngredient() {
 
-  const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
-
-  const handleIngredientSelect = (selectedIngredient, index) => {
-    dispatch({ type: 'addIngredient', payload: { ...selectedIngredient, index } });
-  };
-
-  console.log(state);
+  const { handleIngredientSelect } = useContext(appContext);
+  const { ingredientsList } = useContext(appContext);
   
 
   return (
     <div>
-      {ingredients.map((ingredient, index) => (
+      {ingredientsList.map((ingredient, index) => (
         <IngredientCard
           key={ingredient.id}
           ingredient={ingredient}
