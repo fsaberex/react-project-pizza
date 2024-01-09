@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import appContext from '../store/appContext';
+import NewAppContext from '../store/newAppContext';
 
 
-function IngredientCard({ ingredient, onClick }) {
+function IngredientCard({ ingredient }) {
+
+  const {dispatch} = useContext(NewAppContext);
 
   return (
     <div>
@@ -9,7 +13,7 @@ function IngredientCard({ ingredient, onClick }) {
         <p>{ingredient.name}</p>
       </div>
       <div>
-        <button onClick={onClick}>Add to Recipe</button>
+        <button onClick={() => {dispatch({type: 'ingredientToAdd', payload: ingredient})}}>Add to Recipe</button>
       </div>
       
     </div>

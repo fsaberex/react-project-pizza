@@ -8,15 +8,18 @@ import Search from './components/Search';
 import SelectIngredient from './components/SelectIngredient';
 import Quantity from './components/Quantity';
 import { Route, Routes, Link } from 'react-router-dom';
-import { appReducer } from './store/appReducer';
+import { INITIAL_RECIPE_STATE, appReducer } from './store/appReducer';
 import { AppProvider } from './store/appContext';
 import Unit from './components/Unit';
+import NewAppContext from './store/newAppContext';
 
 function App() {
 
-  const savedCookbook = [];
-  const [state, dispatch] = useReducer(appReducer, savedCookbook);
+  // const savedCookbook = [];
+  // const [state, dispatch] = useReducer(appReducer, savedCookbook);
   
+  const [store, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
+
 
   return (
       <div className="App-header">
@@ -29,7 +32,8 @@ function App() {
            </nav>
         </>
         <h1>Cookbook Creator</h1>
-        <AppProvider>
+        <NewAppContext.Provider value={{store,dispatch}}>
+        {/* <AppProvider> */}
           <Search />
           <SelectIngredient />
           <Ingredient />
@@ -37,12 +41,14 @@ function App() {
           <Unit />
           <Recipe />
           <Routes>
-            <Route path="/MyCookbook" element={<Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />}>
+            {/* <Route path="/MyCookbook" element={<Cookbook savedRecipes={state.savedRecipes} dispatch={dispatch} />}>
               Cookbook
-            </Route>
+            </Route> */}
           </Routes>
-          <FoodJoke />
-        </AppProvider>
+          {/* <FoodJoke /> */}
+        {/* </AppProvider> */}
+        {store.selectedIngredient ? <EditForm /> : null}
+        </NewAppContext.Provider>
         
       </div>
   );

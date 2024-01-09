@@ -1,75 +1,102 @@
 export const INITIAL_RECIPE_STATE = {
-    ingredient: [],
-    quantity: 1,
-    unit: 'grams',
-    selectedIngredient: [],
-    recipeName: '',
-    recipeSteps: [],
+    searchedFor: {
+        term: null,
+        results: [] //
+    },
+    selectedIngredient: null, //is an ingredient object 
+            // { //recipe object looks like
+        //     qty: Number,
+        //     unit: cups/ts/grams/etc.,
+        //     ingredients: [
+        //         {id, name, picture}
+        //     ]
+        // }
+    ingredients: [], //made up of ingredient objects
+    recipe: null, 
+    // {
+    //     name:,
+    //     steps:, 
+    //     ingredients: [] //pushed from ingredients
+    // }
     cookbookName: '',
-    cookbookRecipes: [] //recipe objects, each that has it' own value
+    cookbookRecipes: [
+        // {recipeOBjects}
+    ] 
 }
 
 export const appReducer = (state, action) => {
+    let newState = {...state};
+    let {type,payload} = action;
 
-    switch (action.type) {
-
-        case 'addIngredient':
-            return {
-                ...state,
-                ingredient: [...state.ingredient, action.payload]
-            };
-        
-        case 'addIngredientToRecipe':
-            return {
-                ...state,
-                selectedIngredient: [...state.ingredient.name, ]
-
+    switch (type) {
+        case 'searchResults':
+            newState.searchedFor = {
+                term: payload.term,
+                results: payload.results
             }
-
-        case 'increaseIngredientQuantity':
-            return {
-                ...state,
-                quantity: state.quantity +1
-            };
-
-        case 'decreaseIngredientQuantity':
-            return {
-                ...state,
-                quantity: state.quantity -1
-            };
-
-        case 'changeUnit':
-            return {
-                ...state,
-                unit: action.payload
-            };
-
-        case 'addRecipeName':
-            return {
-                ...state,
-
-            };
+            console.log(newState);
+            break;
+        case 'ingredientToAdd':
+            newState.selectedIngredient = payload;
+            break;
+        // case 'addIngredient':
+        //     return {
+        //         ...state,
+        //         ingredient: [...state.ingredient, action.payload]
+        //     };
         
-        case 'addRecipeSteps':
-            return {
-                ...state,
-    
-            };
-        
-        case 'addCookbookName':
-            return {
-                ...state,
-    
-            };
-        
-        case 'addRecipe':
-            return {
-                ...state,
-    
-            };
+        // case 'addIngredientToRecipe':
+        //     return {
+        //         ...state,
+        //         selectedIngredient: [...state.ingredient.name, ]
 
-        default:
-            return state;
+        //     }
+
+        // case 'increaseIngredientQuantity':
+        //     return {
+        //         ...state,
+        //         quantity: state.quantity +1
+        //     };
+
+        // case 'decreaseIngredientQuantity':
+        //     return {
+        //         ...state,
+        //         quantity: state.quantity -1
+        //     };
+
+        // case 'changeUnit':
+        //     return {
+        //         ...state,
+        //         unit: action.payload
+        //     };
+
+        // case 'addRecipeName':
+        //     return {
+        //         ...state,
+
+        //     };
+        
+        // case 'addRecipeSteps':
+        //     return {
+        //         ...state,
+    
+        //     };
+        
+        // case 'addCookbookName':
+        //     return {
+        //         ...state,
+    
+        //     };
+        
+        // case 'addRecipe':
+        //     return {
+        //         ...state,
+    
+        //     };
+
+        // default:
+        //     return state;
     }
+    return newState
 
 }

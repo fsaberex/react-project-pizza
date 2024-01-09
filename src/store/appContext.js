@@ -13,41 +13,24 @@ const appContext = createContext({});
 export const AppProvider = ({ children }) => {
 
     const textRef = useRef();
-    const [ingredients, setIngredients] = useState([]);
-    const [state, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
+    // const [ingredients, setIngredients] = useState([]);
+    const [store, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
     // const [ingredient, setIngredient] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
     
-        const searchTerm = textRef.current.value;
-        handleSearch(searchTerm);
+    //     const searchTerm = textRef.current.value;
+    //     handleSearch(searchTerm);
     
-        textRef.current.value = '';
-      };
+    //     textRef.current.value = '';s
+    //   };
 
-    const handleSearch = async (searchTerm) => {
-        let apikey = '76539e4840cf430da3c11786bf18ecbe';
-    
-        try {
-          let res = await axios.get(
-            `https://api.spoonacular.com/food/ingredients/search?query=${searchTerm}&number=10&sort=calories&sortDirection=desc&apiKey=` + apikey
-          );
-    
-          let ingredientData = res.data.results;
-          setIngredients(ingredientData);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-    
-      };
-    
-    useEffect(() => {
-        handleSearch('');
-    }, []);
 
-    const quantity = state.quantity;
-    const ingredientsList = ingredients;
+    
+    // useEffect(() => {
+    //     handleSearch('');
+    // }, []);
 
     const handleIngredientSelect = (selectedIngredient, index) => {
     dispatch({ 
@@ -75,16 +58,13 @@ export const AppProvider = ({ children }) => {
     // 
     
 
-    console.log(state);
-
-    console.log(ingredientsList);
-
     return (
         <appContext.Provider value={{
-            handleSubmit, handleSearch,
-            handleIngredientSelect, ingredientsList,
-            handleQuantityIncrease, handleQuantityDecrease, quantity,
-            handleSelectChange
+            // handleSubmit, handleSearch,
+            // handleIngredientSelect, ingredientsList,
+            // handleQuantityIncrease, handleQuantityDecrease, quantity,
+            // handleSelectChange,
+            store, dispatch
 
         }}>
             {children}
