@@ -14,7 +14,9 @@ function SelectIngredient() {
         <IngredientCard
           key={ingredient.id}
           ingredient={ingredient}
-          onClick={() => handleIngredientSelect(ingredient, index)}
+          onClick={() => handleIngredientSelect(ingredient, index)} //qty, um, ingID
+          //modal with three pieces
+          //in edit mode and not
         />
       ))}
     </div>

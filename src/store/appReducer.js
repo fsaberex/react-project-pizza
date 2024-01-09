@@ -6,7 +6,7 @@ export const INITIAL_RECIPE_STATE = {
     recipeName: '',
     recipeSteps: [],
     cookbookName: '',
-    cookbookRecipes: []
+    cookbookRecipes: [] //recipe objects, each that has it' own value
 }
 
 export const appReducer = (state, action) => {
