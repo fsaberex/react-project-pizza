@@ -1,6 +1,7 @@
-import { createContext, useState, useEffect, useReducer, useRef } from "react";
+import { createContext, useReducer } from "react";
+// import { createContext, useState, useEffect, useReducer, useRef } from "react";
 // import { Route, Switch, useHistory } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 // import IngredientCard from '../components/IngredientCard';
 // import Search from '../components/Search';
 import { appReducer, INITIAL_RECIPE_STATE } from '../store/appReducer';
@@ -12,7 +13,7 @@ const appContext = createContext({});
 
 export const AppProvider = ({ children }) => {
 
-    const textRef = useRef();
+    // const textRef = useRef();
     // const [ingredients, setIngredients] = useState([]);
     const [store, dispatch] = useReducer(appReducer, INITIAL_RECIPE_STATE);
     // const [ingredient, setIngredient] = useState(false);
@@ -32,28 +33,28 @@ export const AppProvider = ({ children }) => {
     //     handleSearch('');
     // }, []);
 
-    const handleIngredientSelect = (selectedIngredient, index) => {
-    dispatch({ 
-            type: 'addIngredient', 
-            payload: { ...selectedIngredient, index } 
-        });
-    };
+    // const handleIngredientSelect = (selectedIngredient, index) => {
+    // dispatch({ 
+    //         type: 'addIngredient', 
+    //         payload: { ...selectedIngredient, index } 
+    //     });
+    // };
 
-    const handleQuantityIncrease = () => {
-        dispatch({type:'increaseIngredientQuantity'});
-      };
+    // const handleQuantityIncrease = () => {
+    //     dispatch({type:'increaseIngredientQuantity'});
+    //   };
     
-    const handleQuantityDecrease = () => {
-        dispatch({type:'decreaseIngredientQuantity'});
-      };
+    // const handleQuantityDecrease = () => {
+    //     dispatch({type:'decreaseIngredientQuantity'});
+    //   };
 
-    const handleSelectChange = (e) => {
-        const selectedValue = e.target.value;
-        dispatch({
-            type: 'changeUnit',
-            payload: selectedValue,
-        });
-    };
+    // const handleSelectChange = (e) => {
+    //     const selectedValue = e.target.value;
+    //     dispatch({
+    //         type: 'changeUnit',
+    //         payload: selectedValue,
+    //     });
+    // };
 
     // 
     

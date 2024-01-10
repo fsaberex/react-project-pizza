@@ -1,6 +1,6 @@
 import IngredientCard from './IngredientCard';
 import { useContext, useEffect } from 'react';
-import appContext from '../store/appContext';
+// import appContext from '../store/appContext';
 import NewAppContext from '../store/newAppContext';
 
 function SelectIngredient() {

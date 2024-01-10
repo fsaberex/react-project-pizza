@@ -3,7 +3,7 @@ export const INITIAL_RECIPE_STATE = {
         term: null,
         results: [] //
     },
-    selectedIngredient: null, //is an ingredient object 
+    // selectedIngredient: null, //is an ingredient object 
             // { //recipe object looks like
         //     qty: Number,
         //     unit: cups/ts/grams/etc.,
@@ -11,6 +11,11 @@ export const INITIAL_RECIPE_STATE = {
         //         {id, name, picture}
         //     ]
         // }
+    selectedIngredient: {
+        ingredient: null,
+        quantity: null,
+        unitOfMeasure: null
+    },
     ingredients: [], //made up of ingredient objects
     recipe: null, 
     // {
@@ -37,7 +42,17 @@ export const appReducer = (state, action) => {
             console.log(newState);
             break;
         case 'ingredientToAdd':
-            newState.selectedIngredient = payload;
+            // newState.selectedIngredient = payload;
+            newState.selectedIngredient = {ingredient: payload}
+            console.log(payload)
+            break;
+        case 'editIngredient':
+            newState.selectedIngredient = {
+                ingredient: newState.selectedIngredient,
+                quantity: payload.quantity,
+                unitOfMeasure: payload.unitOfMeasure
+            }
+            console.log(newState);
             break;
         // case 'addIngredient':
         //     return {
@@ -94,8 +109,8 @@ export const appReducer = (state, action) => {
     
         //     };
 
-        // default:
-        //     return state;
+        default:
+            break;
     }
     return newState
 

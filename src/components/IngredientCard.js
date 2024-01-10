@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import appContext from '../store/appContext';
+//import appContext from '../store/appContext';
 import NewAppContext from '../store/newAppContext';
 
 
@@ -9,11 +9,11 @@ function IngredientCard({ ingredient }) {
 
   return (
     <div>
-      <div id="ingredient">
+      <div id="ingredientCard">
         <p>{ingredient.name}</p>
       </div>
       <div>
-        <button onClick={() => {dispatch({type: 'ingredientToAdd', payload: ingredient})}}>Add to Recipe</button>
+        <button onClick={() => {dispatch({type: 'ingredientToAdd', payload: ingredient})}}>Select Ingredient</button>
       </div>
       
     </div>

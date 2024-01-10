@@ -1,11 +1,13 @@
 // import React, { useState } from 'react';
 // import { useContext } from 'react';
 // import appContext from '../store/appContext';
+//import NewAppContext from '../store/newAppContext';
 
 // function RecipeCard({ selectedIngredients }) {
 function RecipeCard() {
 
   //const{ handleAddIngredient } = useContext(appContext);
+  //const {dispatch} = useContext(NewAppContext);
 
 
   return (
